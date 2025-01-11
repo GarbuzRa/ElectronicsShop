@@ -9,4 +9,8 @@ class ProductsInteractor(val productsRepository: ProductsRepository) {
     suspend fun getProducts(): Flow<Result<List<ProductDomain>>> {
        return productsRepository.getProducts()
     }
+
+    suspend fun searchProduct(name: String): Flow<Result<List<ProductDomain>>> {
+        return productsRepository.searchProduct(name)
+    }
 }

@@ -17,4 +17,14 @@ class ProductsRepositoryImpl(val api: ShopApi): ProductsRepository {
             emit(Result.failure(e))
         }
     }
+
+    override suspend fun searchProduct(name: String): Flow<Result<List<ProductDomain>>> = flow {
+        try {
+            val searhResponce = api.getProducts()
+            val searchResult = searhResponce.products.map { it.toDomainModel() }
+            emit(Result.success(searchResult))
+        } catch (e: Exception) {
+            emit(Result.failure(e))
+        }
+    }
 }
