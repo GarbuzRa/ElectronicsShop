@@ -4,10 +4,12 @@ import com.example.electronicsshop.data.remote.ShopApi
 import com.example.electronicsshop.data.repository.ProductsRepositoryImpl
 import com.example.electronicsshop.domain.interactor.ProductsInteractor
 import com.example.electronicsshop.domain.repository.ProductsRepository
+import com.example.electronicsshop.presentation.viewmodels.ProductViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+
     val appModule = module {
         single <ShopApi> {
             Retrofit.Builder()
@@ -19,4 +21,8 @@ import retrofit2.create
         single <ProductsRepository> {ProductsRepositoryImpl(get())}
 
         factory {ProductsInteractor(get())}
+
+        viewModel {
+            ProductViewModel(get())
+        }
     }

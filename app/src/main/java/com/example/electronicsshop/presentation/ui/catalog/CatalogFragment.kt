@@ -61,7 +61,7 @@ class CatalogFragment : Fragment() {
     fun setupAdapter() {
         adapter = ProductsAdapter()
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
 }
