@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id ("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
 }
 
 android {
@@ -19,9 +19,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    kapt {
-        arguments { arg("room.schemaLocation", "$projectDir/schemas") }
-    }
 
     buildTypes {
         release {
@@ -47,7 +44,7 @@ android {
 }
 
 dependencies {
-
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation("androidx.room:room-common:2.6.1")
     val roomVersion = "2.6.1"
     implementation("com.github.bumptech.glide:glide:4.12.0")
@@ -67,7 +64,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    //ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }

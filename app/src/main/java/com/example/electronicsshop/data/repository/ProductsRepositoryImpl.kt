@@ -11,7 +11,7 @@ class ProductsRepositoryImpl(val api: ShopApi): ProductsRepository {
     override suspend fun getProducts(): Flow<Result<List<ProductDomain>>> = flow {
         try {
             val responce = api.getProducts()
-            val result =  responce.products.map {it.toDomainModel()}
+            val result =  responce.map {it.toDomainModel()}
             emit(Result.success(result))
         } catch (e: Exception) {
             emit(Result.failure(e))
@@ -21,7 +21,7 @@ class ProductsRepositoryImpl(val api: ShopApi): ProductsRepository {
     override suspend fun searchProduct(name: String): Flow<Result<List<ProductDomain>>> = flow {
         try {
             val searhResponce = api.getProducts()
-            val searchResult = searhResponce.products.map { it.toDomainModel() }
+            val searchResult = searhResponce.map { it.toDomainModel() }
             emit(Result.success(searchResult))
         } catch (e: Exception) {
             emit(Result.failure(e))
