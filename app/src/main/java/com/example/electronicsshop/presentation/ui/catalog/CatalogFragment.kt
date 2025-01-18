@@ -28,6 +28,7 @@ class CatalogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         observeViewModel()
+        setupListeners()
     }
 
     override fun onResume() {
@@ -55,6 +56,15 @@ class CatalogFragment : Fragment() {
                     binding.errorMsg.visibility = View.VISIBLE
                 }
             }
+        }
+    }
+
+    fun setupListeners() {
+        binding.chipPrice.setOnClickListener {
+            viewModel.sortByPrice(up = true)
+        }
+        binding.chipPriceDesc.setOnClickListener {
+            viewModel.sortByPrice(up = false)
         }
     }
 

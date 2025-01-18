@@ -40,6 +40,17 @@ class ProductViewModel(val interactor: ProductsInteractor): ViewModel() {
             }
         }
     }
+
+    fun sortByPrice(up: Boolean) {
+       if (!(_state.value is State.Success)) return
+
+        if (up) {
+            (_state.value as State.Success).list.sortedBy { it.price }
+        } else {
+            (_state.value as State.Success).list.sortedByDescending { it.price }
+        }
+    }
+
   /*  fun searchProduct(name: String) {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
